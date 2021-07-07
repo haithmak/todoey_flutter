@@ -5,7 +5,8 @@ class TaskItem extends StatelessWidget {
   bool ? isChecked = true;
   String ? name ;
   final toggleCheckedState;
-  TaskItem({this.name , this.isChecked , this.toggleCheckedState}) ;
+  final longPressCallback;
+  TaskItem({this.name , this.isChecked , this.toggleCheckedState , this.longPressCallback}) ;
 
   void onCheckBoxToggled(bool ? checked) {
     isChecked = checked!;
@@ -18,6 +19,7 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onLongPress: longPressCallback,
       title: Text(
         name!,
         style: TextStyle(
@@ -28,6 +30,7 @@ class TaskItem extends StatelessWidget {
       activeColor: Colors.lightBlueAccent,
     value: isChecked,
     onChanged: toggleCheckedState,
+
     ),);
       // trailing:  TaskCheckbox(
       //   checkedState: isChecked,

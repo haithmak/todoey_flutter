@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todoey_flutter/models/task_data.dart';
+import 'package:provider/provider.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  String ? newTaskTitle ;
-  final addTaskCallbacks ;
-
-  AddTaskScreen(this.addTaskCallbacks) ;
+  String? newTaskTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +33,8 @@ class AddTaskScreen extends StatelessWidget {
             TextField(
               autofocus: true,
               textAlign: TextAlign.center,
-              onChanged: (newText){
-                newTaskTitle = newText ;
+              onChanged: (newText) {
+                newTaskTitle = newText;
               },
             ),
             FlatButton(
@@ -46,8 +45,15 @@ class AddTaskScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              onPressed: (){
-                addTaskCallbacks(newTaskTitle) ;
+              onPressed: () {
+                Provider.of<TaskData>(
+                  context,
+                  //important**************
+                  listen: false,
+                  //important**************
+                ).addTask(newTaskTitle!);
+                Navigator.pop(context);
+                //print(newTask) ;
               },
             )
           ],
